@@ -60,9 +60,12 @@ export default function hash(opts = {}) {
 
 	return {
 		name: 'hash',
-		onwrite: function(bundle, data) {
+		generateBundle: function(outputOptions, bundle) {
+			const keys = Object.keys(bundle);
+			if (keys.length < 1) return false;
+			const data = bundle[keys[0]];
 			const destinationOption = options.output ? options.output.file : options.dest;
-			const builtFile = bundle.file || bundle.dest;
+			const builtFile = outputOptions.file || outputOptions.dest;
 
 			if(!destinationOption || !hasTemplate(destinationOption)) {
 				logError(msg.noTemplate);
@@ -100,12 +103,12 @@ export default function hash(opts = {}) {
 			mkdirpath(fileName);
 
 			let code = data.code;
-			if (bundle.sourcemap) {
+			if (outputOptions.sourcemap) {
 				const basename = path.basename(fileName);
 				data.map.file = basename;
 
 				let url;
-				if (bundle.sourcemap === 'inline') {
+				if (outputOptions.sourcemap === 'inline') {
 					url = data.map.toUrl();
 				} else {
 					url = basename + '.map';
@@ -120,6 +123,6 @@ export default function hash(opts = {}) {
 			if(options.callback && typeof options.callback === 'function') {
 				options.callback(fileName);
 			}
-		}
+		},
 	};
 }

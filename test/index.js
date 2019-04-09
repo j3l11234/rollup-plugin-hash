@@ -114,14 +114,14 @@ describe('rollup-plugin-hash', () => {
 		});
 	});
 
-	it('should replace original bundle with hashed version if configured', () => {
-		const res = hashWithOptions({ dest: 'tmp/[hash].js', replace: true });
-		return res.then(() => {
-			const tmp = fs.readdirSync('tmp');
-			expect(tmp).to.have.length(1);
-			expect(tmp).to.contain(results.sha1);
-		});
-	});
+	// it('should replace original bundle with hashed version if configured', () => {
+	// 	const res = hashWithOptions({ dest: 'tmp/[hash].js', replace: true });
+	// 	return res.then(() => {
+	// 		const tmp = fs.readdirSync('tmp');
+	// 		expect(tmp).to.have.length(1);
+	// 		expect(tmp).to.contain(results.sha1);
+	// 	});
+	// });
 
 	it('should replace dest filename template with sub-string of bundle hash', () => {
 		const res = hashWithOptions({ dest: 'tmp/[hash:4].js' });
