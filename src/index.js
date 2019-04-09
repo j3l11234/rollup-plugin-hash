@@ -64,7 +64,19 @@ export default function hash(opts = {}) {
 			const keys = Object.keys(bundle);
 			if (keys.length < 1) return false;
 			const data = bundle[keys[0]];
-			const destinationOption = options.output ? options.output.file : options.dest;
+
+			let destinationOption;
+			if (Array.isArray(options.output)) {
+				const foundOutput = options.output.find(o => o.file === outputOptions.file);
+				if (foundOutput) {
+					destinationOption = foundOutput.dest;
+				} else {
+					return false;
+				}
+			} else {
+				destinationOption = options.dest;
+			}
+			
 			const builtFile = outputOptions.file || outputOptions.dest;
 
 			if(!destinationOption || !hasTemplate(destinationOption)) {
