@@ -1,4 +1,6 @@
-# rollup-plugin-hash [![Travis Build Status][travis-img]][travis]
+# rollup-plugin-hash2 [![Travis Build Status][travis-img]][travis]
+
+this project is forked from rollup-plugin-hash
 
 [travis-img]: https://travis-ci.org/phamann/rollup-plugin-hash.svg
 [travis]: https://travis-ci.org/phamann/rollup-plugin-hash
